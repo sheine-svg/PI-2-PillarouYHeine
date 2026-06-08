@@ -27,13 +27,12 @@ function Login(props) {
                 props.navigation.navigate('HomeMenu');
             })
             .catch(error => {
-                setLoginError('Credenciales inválidas.')
+                setLoginError('Credenciales inválidas')
             })
     };
 
     useEffect(() => {
         auth.onAuthStateChanged(user => {
-            console.log(user);
             if (user) {
                 props.navigation.navigate('HomeMenu')
             }
@@ -45,11 +44,13 @@ function Login(props) {
             <Text style={styles.titulo}>Login</Text>
 
             <View style={styles.form}>
+
                 <TextInput style={styles.campo}
                     keyboardType='email-address'
                     placeholder='Ingresa tu Email'
                     onChangeText={text => setEmail(text)}
                     value={email} />
+
                 <TextInput style={styles.campo}
                     keyboardType='default'
                     placeholder='Ingresa una contraseña'
@@ -61,17 +62,13 @@ function Login(props) {
 
                 <Pressable onPress={() => onSubmit()}
                     style={styles.botonApp}>
-                    <Text style={styles.textoBoton} > Login </Text>
+                    <Text style={styles.textoBoton}> Ingresar </Text>
                 </Pressable>
+
                 <Pressable
                     onPress={() => props.navigation.navigate('Register')}
                     style={styles.botonRegister}>
                     <Text style={styles.textoBoton}>No tengo cuenta</Text>
-                </Pressable>
-                <Pressable
-                    onPress={() => props.navigation.navigate('HomeMenu')}
-                    style={styles.botonRegister}>
-                    <Text style={styles.textoBoton}>Ir a Home</Text>
                 </Pressable>
             </View>
         </View>
