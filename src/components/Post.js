@@ -1,6 +1,11 @@
 import { Text, View, StyleSheet, Pressable } from 'react-native';
 import { db, auth } from "../firebase/config";
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import firebase from 'firebase';
+import Comentar from '../screens/Comentar';
+
+const Stack = createNativeStackNavigator();
 
 function Post(props) {
     const likes = props.data.likes || [];
@@ -45,8 +50,9 @@ function Post(props) {
                         <Text style={styles.textoBoton}>Like</Text>
                     </Pressable>
             }
-
-            {/* botón de comentar */}
+            <Pressable onPress={() => props.navigation.navigate("Comentar", { idPosteo: props.id })} style={styles.boton} >
+                <Text style={styles.textoBoton}>Comentar</Text>
+            </Pressable>
         </View>
     )
 }

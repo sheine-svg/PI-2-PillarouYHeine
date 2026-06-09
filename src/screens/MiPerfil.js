@@ -1,29 +1,31 @@
 import { Text, View, StyleSheet, Pressable, TextInput, FlatList } from 'react-native';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { db, auth } from "../firebase/config";
 
 function MiPerfil() {
     const [perfil, setPerfil] = useState([]);
 
-    db.collection("users").where("email", "==", auth.currentUser.email).onSnapshot(
-        docs => {
-            let usuario = [];
-            docs.forEach(doc => {
-                usuario.push({
-                    nombre: doc.data().nombre,
-                    mail: doc.data().email,
-                    // falta agregar posteos
+    useEffect(() => {
+        db.collection("users").where("mail", "==", auth.currentUser.email).onSnapshot(
+            docs => {
+                let usuario = [];
+                docs.forEach(doc => {
+                    usuario.push({
+                        nombre: doc.data().nombre,
+                        mail: doc.data().mail,
+                        // falta agregar posteos
+                    })
+                    setPerfil(usuario)
                 })
-                setPerfil(usuario)
             })
-        })
+    }, [])
 
     return (
         <View style={styles.container}>
             <Text style={styles.titulo}>Mi Perfil</Text>
 
             <FlatList
-                data={ perfil }
+                data={perfil}
                 renderItem={({ item }) => (
                     <View>
                         <Text>Usuario: {item.nombre}</Text>
