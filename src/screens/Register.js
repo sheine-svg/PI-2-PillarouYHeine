@@ -42,6 +42,12 @@ function Register(props) {
             })
     };
 
+    /* En caso de error en los campos de email o contraseña debe mostrarse el 
+    mensaje al usuario con el tipo de error recibido de Firebase
+    
+    estamos mostrando el mensaje "fallo en el registro", tendriamos que poner en el estado solo error?
+     */
+
     return (
         <View style={styles.container}>
             <Text style={styles.titulo}>Registro</Text>

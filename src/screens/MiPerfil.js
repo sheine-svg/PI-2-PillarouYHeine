@@ -1,8 +1,8 @@
-import { Text, View, StyleSheet, Pressable, TextInput, FlatList } from 'react-native';
+import { Text, View, StyleSheet, Pressable, FlatList } from 'react-native';
 import { useState, useEffect } from "react";
 import { db, auth } from "../firebase/config";
 
-function MiPerfil() {
+function MiPerfil(props) {
     const [perfil, setPerfil] = useState([]);
 
     useEffect(() => {
@@ -18,7 +18,12 @@ function MiPerfil() {
                     setPerfil(usuario)
                 })
             })
-    }, [])
+    }, []);
+
+    function logout() {
+        auth.signOut();
+        props.navigation.navigate('Login');
+    }
 
     return (
         <View style={styles.container}>
@@ -33,6 +38,12 @@ function MiPerfil() {
                     </View>
                 )}
             />
+
+            <Pressable
+                onPress={() => logout()}
+                style={styles.boton}>
+                <Text style={styles.textoBoton}>Desloguearse</Text>
+            </Pressable>
         </View>
     )
 }
@@ -47,6 +58,17 @@ const styles = StyleSheet.create({
         fontSize: 50,
         marginBottom: 10
     },
+    boton: {
+        padding: 12,
+        backgroundColor: "#F5A623",
+        borderRadius: 4,
+        alignItems: "center",
+        marginBottom: 10,
+    },
+    textoBoton: {
+        fontWeight: "bold",
+        fontSize: 16,
+    }
 })
 
 export default MiPerfil;

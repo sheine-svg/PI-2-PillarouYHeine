@@ -1,9 +1,7 @@
 import { Text, View, StyleSheet, Pressable } from 'react-native';
 import { db, auth } from "../firebase/config";
-import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import firebase from 'firebase';
-import Comentar from '../screens/Comentar';
 
 const Stack = createNativeStackNavigator();
 
@@ -41,18 +39,21 @@ function Post(props) {
 
             <Text style={styles.cantidadLikes}>{likes.length} likes</Text>
 
-            {
-                yaTieneLike
-                    ? <Pressable onPress={() => sacarLike()} style={styles.boton}>
-                        <Text style={styles.textoBoton}>Sacar like</Text>
-                    </Pressable>
-                    : <Pressable onPress={() => like()} style={styles.boton}>
-                        <Text style={styles.textoBoton}>Like</Text>
-                    </Pressable>
-            }
-            <Pressable onPress={() => props.navigation.navigate("Comentar", { idPosteo: props.id })} style={styles.boton} >
-                <Text style={styles.textoBoton}>Comentar</Text>
-            </Pressable>
+            <View style={styles.botonesLikeYComentario}>
+
+                {
+                    yaTieneLike
+                        ? <Pressable onPress={() => sacarLike()} style={styles.boton}>
+                            <Text style={styles.textoBoton}>❤️</Text>
+                        </Pressable>
+                        : <Pressable onPress={() => like()} style={styles.boton}>
+                            <Text style={styles.textoBoton}>🩶</Text>
+                        </Pressable>
+                }
+                <Pressable onPress={() => props.navigation.navigate("Comentar", { idPosteo: props.id })} style={styles.boton} >
+                    <Text style={styles.textoBoton}>💬</Text>
+                </Pressable>
+            </View>
         </View>
     )
 }
@@ -85,11 +86,17 @@ const styles = StyleSheet.create({
         borderRadius: 4,
         alignItems: "center",
         alignSelf: "flex-start",
+        marginTop: 6,
+        marginRight: 8
     },
     textoBoton: {
         fontWeight: "bold",
         fontSize: 14,
         color: "#ffffff",
+    },
+    botonesLikeYComentario:{
+        flex: 1,
+        flexDirection: "row"
     }
 });
 
