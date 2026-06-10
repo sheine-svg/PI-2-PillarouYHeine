@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { db } from "../firebase/config";
 import Post from '../components/Post';
 
-function HomePage( {navigation} ) {
+function HomePage(props) {
     const [posteos, setPosteos] = useState([]);
     const [loading, setLoading] = useState(true);
 
@@ -35,7 +35,7 @@ function HomePage( {navigation} ) {
             <FlatList
                 data={posteos}
                 keyExtractor={posteo => posteo.id.toString()}
-                renderItem={({ item }) => <Post data={item.data} id={item.id} navigation={navigation} />}
+                renderItem={({ item }) => <Post data={item.data} id={item.id} navigation={props.navigation} />}
             />
 
         </View>

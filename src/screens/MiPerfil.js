@@ -1,9 +1,11 @@
 import { Text, View, StyleSheet, Pressable, FlatList } from 'react-native';
 import { useState, useEffect } from "react";
 import { db, auth } from "../firebase/config";
+import Post from '../components/Post';
 
 function MiPerfil(props) {
     const [perfil, setPerfil] = useState([]);
+    const [posteosUsuario, setPosteosUsuario] = useState([]);
 
     useEffect(() => {
         db.collection("users").where("mail", "==", auth.currentUser.email).onSnapshot(
@@ -13,10 +15,21 @@ function MiPerfil(props) {
                     usuario.push({
                         nombre: doc.data().nombre,
                         mail: doc.data().mail,
-                        // falta agregar posteos
                     })
                     setPerfil(usuario)
                 })
+            })
+
+        db.collection("posts").where("email", "==", auth.currentUser.email).onSnapshot(
+            docs => {
+                let posts = [];
+                docs.forEach(doc => {
+                    posts.push({
+                        id: doc.id,
+                        data: doc.data()
+                    })
+                })
+                setPosteosUsuario(posts)
             })
     }, []);
 
@@ -29,7 +42,7 @@ function MiPerfil(props) {
         <View style={styles.container}>
             <Text style={styles.titulo}>Mi Perfil</Text>
 
-            <FlatList
+            <FlatList style={styles.datos}
                 data={perfil}
                 renderItem={({ item }) => (
                     <View>
@@ -37,6 +50,12 @@ function MiPerfil(props) {
                         <Text>Email: {item.mail}</Text>
                     </View>
                 )}
+            />
+
+            <FlatList 
+                data={posteosUsuario}
+                keyExtractor={posteo => posteo.id.toString()}
+                renderItem={({ item }) => <Post data={item.data} id={item.id} navigation={props.navigation} />}
             />
 
             <Pressable
@@ -68,7 +87,10 @@ const styles = StyleSheet.create({
     textoBoton: {
         fontWeight: "bold",
         fontSize: 16,
-    }
+    },
+    datos: {
+        height: 60,
+    },
 })
 
 export default MiPerfil;
