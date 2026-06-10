@@ -35,8 +35,6 @@ function Post(props) {
             <Text style={styles.usuario}>{props.data.email}</Text>
             <Text style={styles.texto}>{props.data.descripcionPost}</Text>
 
-            {/* lo de la imagen / cámara */}
-
             <Text style={styles.cantidadLikes}>{likes.length} likes</Text>
 
             <View style={styles.botonesLikeYComentario}>

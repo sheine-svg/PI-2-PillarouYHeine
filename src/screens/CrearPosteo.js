@@ -10,6 +10,7 @@ function NuevoPost(props) {
             email: auth.currentUser.email,
             descripcionPost: descripcion,
             likes: [],
+            comentarios: [],
             createdAt: Date.now(),
         })
         .then(res => {props.navigation.navigate('Home');}
