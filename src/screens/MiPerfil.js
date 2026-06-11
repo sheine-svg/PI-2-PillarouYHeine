@@ -20,17 +20,18 @@ function MiPerfil(props) {
                 })
             })
 
-        db.collection("posts").where("email", "==", auth.currentUser.email).onSnapshot(
-            docs => {
-                let posts = [];
-                docs.forEach(doc => {
-                    posts.push({
-                        id: doc.id,
-                        data: doc.data()
+        db.collection("posts")
+            .where("email", "==", auth.currentUser.email).onSnapshot(
+                docs => {
+                    let posts = [];
+                    docs.forEach(doc => {
+                        posts.push({
+                            id: doc.id,
+                            data: doc.data()
+                        })
                     })
+                    setPosteosUsuario(posts)
                 })
-                setPosteosUsuario(posts)
-            })
     }, []);
 
     function logout() {
@@ -52,7 +53,7 @@ function MiPerfil(props) {
                 )}
             />
 
-            <FlatList 
+            <FlatList
                 data={posteosUsuario}
                 keyExtractor={posteo => posteo.id.toString()}
                 renderItem={({ item }) => <Post data={item.data} id={item.id} navigation={props.navigation} />}

@@ -13,7 +13,7 @@ function NuevoPost(props) {
             comentarios: [],
             createdAt: Date.now(),
         })
-        .then(res => {props.navigation.navigate('Home');}
+        .then(res => {props.navigation.navigate('HomeStack');}
         )
         .catch( error => console.log(error))
     };

@@ -1,6 +1,7 @@
 import { Pressable, View, Text, StyleSheet, TextInput } from 'react-native';
 import { useState, useEffect } from "react";
 import { auth } from "../firebase/config";
+import Header from '../components/Header';
 
 function Login(props) {
     const [email, setEmail] = useState("");
@@ -41,35 +42,39 @@ function Login(props) {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.titulo}>Login</Text>
+            <Header />
 
-            <View style={styles.form}>
+            <View style={styles.contenido}>
+                <Text style={styles.titulo}>Iniciar sesión</Text>
 
-                <TextInput style={styles.campo}
-                    keyboardType='email-address'
-                    placeholder='Ingresa tu Email'
-                    onChangeText={text => setEmail(text)}
-                    value={email} />
+                <View style={styles.form}>
 
-                <TextInput style={styles.campo}
-                    keyboardType='default'
-                    placeholder='Ingresa una contraseña'
-                    secureTextEntry={true}
-                    onChangeText={text => setPassword(text)}
-                    value={password} />
+                    <TextInput style={styles.campo}
+                        keyboardType='email-address'
+                        placeholder='Ingresa tu Email'
+                        onChangeText={text => setEmail(text)}
+                        value={email} />
 
-                <Text style={styles.error}>{loginError}</Text>
+                    <TextInput style={styles.campo}
+                        keyboardType='default'
+                        placeholder='Ingresa una contraseña'
+                        secureTextEntry={true}
+                        onChangeText={text => setPassword(text)}
+                        value={password} />
 
-                <Pressable onPress={() => onSubmit()}
-                    style={styles.botonApp}>
-                    <Text style={styles.textoBoton}> Ingresar </Text>
-                </Pressable>
+                    <Text style={styles.error}>{loginError}</Text>
 
-                <Pressable
-                    onPress={() => props.navigation.navigate('Register')}
-                    style={styles.botonRegister}>
-                    <Text style={styles.textoBoton}>No tengo cuenta</Text>
-                </Pressable>
+                    <Pressable onPress={() => onSubmit()}
+                        style={styles.boton}>
+                        <Text style={styles.textoBoton}>Ingresar</Text>
+                    </Pressable>
+
+                    <Pressable
+                        onPress={() => props.navigation.navigate('Register')}
+                        style={styles.botonDos}>
+                        <Text style={styles.textoBotonDos}>No tengo cuenta</Text>
+                    </Pressable>
+                </View>
             </View>
         </View>
     )
@@ -78,56 +83,61 @@ function Login(props) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: "#ffffffff"
+    },
+    contenido:{
         padding: 20,
+        marginTop: 20
     },
     titulo: {
         fontWeight: "bold",
-        fontSize: 50,
-        marginBottom: 10,
+        fontSize: 30,
+        marginBottom: 15,
+        color: "#2563EB",
+        textAlign: "center"
     },
-    descripcion: {
-        fontSize: 16,
-        marginBottom: 10,
-    },
-    botonRegister: {
+    boton: {
         padding: 12,
-        backgroundColor: "#4FB3D9",
-        borderRadius: 4,
+        backgroundColor: "#2563EB",
+        borderRadius: 15,
         alignItems: "center",
-        marginBottom: 10,
-    },
-    botonApp: {
-        padding: 12,
-        backgroundColor: "#F5A623",
-        borderRadius: 4,
-        alignItems: "center",
-        marginBottom: 10,
+        marginTop: 4
     },
     textoBoton: {
         fontWeight: "bold",
-        fontSize: 16,
+        fontSize: 16
     },
     campo: {
         borderWidth: 1,
         borderColor: "#d1d5db",
-        borderRadius: 8,
+        borderRadius: 15,
         paddingHorizontal: 14,
         paddingVertical: 12,
         fontSize: 16,
-        backgroundColor: "#ffffff",
-        color: "#111827",
         marginBottom: 12,
     },
     form: {
-        backgroundColor: "#ffffff",
         padding: 20,
-        borderRadius: 12,
+        borderRadius: 15,
     },
     error: {
         color: "red",
         marginBottom: 12,
         textAlign: "center",
-    }
+    },
+    botonDos: {
+        padding: 14,
+        borderWidth: 1,
+        borderColor: "#2563EB",
+        borderRadius: 15,
+        alignItems: "center",
+        marginTop: 12,
+    },
+    textoBotonDos: {
+        color: "#2563EB",
+        fontWeight: "bold",
+        fontSize: 16,
+    },
 });
 
 export default Login;

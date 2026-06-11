@@ -1,4 +1,4 @@
-import { Text, View, StyleSheet, FlatList } from 'react-native';
+import { Text, View, StyleSheet, FlatList, ActivityIndicator } from 'react-native';
 import { useState, useEffect } from "react";
 import { db } from "../firebase/config";
 import Post from '../components/Post';
@@ -24,7 +24,11 @@ function HomePage(props) {
     }, []);
 
     if (loading) {
-        return (<Text style={styles.cargando}>Cargando...</Text>)
+        return (
+            <View style={styles.cargando}>
+                <ActivityIndicator size='large' color='green' />
+            </View>
+        )
     }
 
     return (
@@ -52,8 +56,9 @@ const styles = StyleSheet.create({
         marginBottom: 10,
     },
     cargando: {
-        fontSize: 40,
-        alignSelf: "center"
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center"
     }
 });
 

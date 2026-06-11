@@ -1,6 +1,7 @@
 import { Pressable, View, Text, StyleSheet, TextInput } from 'react-native';
 import { useState, useEffect } from "react";
 import { db, auth } from "../firebase/config";
+import Header from '../components/Header';
 
 function Register(props) {
     const [email, setEmail] = useState("");
@@ -38,49 +39,52 @@ function Register(props) {
                 })
             })
             .catch(error => {
-                setRegisterError('Fallo en el registro.')
+                console.log(error.message);
+                setRegisterError(error.message)
             })
     };
 
-    /* En caso de error en los campos de email o contraseña debe mostrarse el 
-    mensaje al usuario con el tipo de error recibido de Firebase
-    
-    estamos mostrando el mensaje "fallo en el registro", tendriamos que poner en el estado solo error?
-     */
-
     return (
         <View style={styles.container}>
-            <Text style={styles.titulo}>Registro</Text>
+            <Header />
 
-            <View style={styles.form}>
-                <TextInput style={styles.campo}
-                    keyboardType='default'
-                    placeholder='Ingresa un nombre de usuario'
-                    onChangeText={text => setUserName(text)}
-                    value={userName} />
-                <TextInput style={styles.campo}
-                    keyboardType='email-address'
-                    placeholder='Ingresa un Email'
-                    onChangeText={text => setEmail(text)}
-                    value={email} />
-                <TextInput style={styles.campo}
-                    keyboardType='default'
-                    placeholder='Ingresa una contraseña'
-                    secureTextEntry={true}
-                    onChangeText={text => setPassword(text)}
-                    value={password} />
+            <View style={styles.contenido}>
+                <Text style={styles.titulo}>Registro</Text>
 
-                <Text style={styles.error}>{registerError}</Text>
+                <View style={styles.form}>
+                    <TextInput style={styles.campo}
+                        keyboardType='default'
+                        placeholder='Ingresa un nombre de usuario'
+                        onChangeText={text => setUserName(text)}
+                        value={userName} />
 
-                <Pressable onPress={() => onSubmit()}
-                    style={styles.boton}>
-                    <Text style={styles.textoBoton}> Registrarse </Text>
-                </Pressable>
-                <Pressable
-                    onPress={() => props.navigation.navigate('Login')}
-                    style={styles.boton}>
-                    <Text style={styles.textoBoton}>Ya tengo una cuenta</Text>
-                </Pressable>
+                    <TextInput style={styles.campo}
+                        keyboardType='email-address'
+                        placeholder='Ingresa un Email'
+                        onChangeText={text => setEmail(text)}
+                        value={email} />
+
+                    <TextInput style={styles.campo}
+                        keyboardType='default'
+                        placeholder='Ingresa una contraseña'
+                        secureTextEntry={true}
+                        onChangeText={text => setPassword(text)}
+                        value={password} />
+
+                    <Text style={styles.error}>{registerError}</Text>
+
+                    <Pressable
+                        onPress={() => onSubmit()}
+                        style={styles.boton}>
+                        <Text style={styles.textoBoton}> Registrarse </Text>
+                    </Pressable>
+
+                    <Pressable
+                        onPress={() => props.navigation.navigate('Login')}
+                        style={styles.botonDos}>
+                        <Text style={styles.textoBotonDos}>Ya tengo una cuenta</Text>
+                    </Pressable>
+                </View>
             </View>
         </View>
     )
@@ -89,45 +93,61 @@ function Register(props) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        margin: 20,
+        backgroundColor: "#ffffffff"
+    },
+    contenido: {
+        padding: 20,
+        marginTop: 20
+    },
+    titulo: {
+        fontWeight: "bold",
+        fontSize: 30,
+        marginBottom: 15,
+        color: "#2563EB",
+        textAlign: "center"
     },
     boton: {
         padding: 12,
-        backgroundColor: "rgba(42, 84, 237, 0.74)",
-        borderRadius: 4,
+        backgroundColor: "#2563EB",
+        borderRadius: 15,
         alignItems: "center",
-        margin: 10
+        marginTop: 4
     },
     textoBoton: {
         fontWeight: "bold",
         fontSize: 16
     },
-    titulo: {
-        fontWeight: "bold",
-        fontSize: 50,
-        marginBottom: 10
-    },
     form: {
-        backgroundColor: "#ffffff",
         padding: 20,
-        borderRadius: 12,
+        borderRadius: 15,
     },
     campo: {
         borderWidth: 1,
         borderColor: "#d1d5db",
-        borderRadius: 8,
+        borderRadius: 15,
         paddingHorizontal: 14,
         paddingVertical: 12,
         fontSize: 16,
-        backgroundColor: "#ffffff",
-        color: "#111827",
         marginBottom: 12,
     },
     error: {
         color: "red",
         marginBottom: 12,
         textAlign: "center",
-    }
+    },
+    botonDos: {
+        padding: 14,
+        borderWidth: 1,
+        borderColor: "#2563EB",
+        borderRadius: 15,
+        alignItems: "center",
+        marginTop: 12,
+    },
+    textoBotonDos: {
+        color: "#2563EB",
+        fontWeight: "bold",
+        fontSize: 16,
+    },
 })
 
 export default Register;
