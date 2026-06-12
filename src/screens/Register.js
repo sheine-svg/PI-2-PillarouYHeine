@@ -93,7 +93,7 @@ function Register(props) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#ffffffff"
+        backgroundColor: "#FFFFFF"
     },
     contenido: {
         padding: 20,

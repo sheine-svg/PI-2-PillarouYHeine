@@ -58,11 +58,12 @@ function Post(props) {
 
 const styles = StyleSheet.create({
     post: {
-        backgroundColor: "#ffffff",
+        backgroundColor: "#F5F6FA",
         padding: 15,
         marginVertical: 6,
         marginHorizontal: 10,
-        borderRadius: 8,
+        borderRadius: 12,
+        borderColor: "#E5E7EB"
     },
     usuario: {
         fontWeight: "bold",
@@ -75,22 +76,21 @@ const styles = StyleSheet.create({
     },
     cantidadLikes: {
         fontSize: 13,
-        color: "#6b7280",
+        color: "#6B7280",
         marginBottom: 8,
     },
     boton: {
         padding: 10,
-        backgroundColor: "rgba(42, 84, 237, 0.74)",
-        borderRadius: 4,
+        backgroundColor: "#2563EB",
+        borderRadius: 8,
         alignItems: "center",
         alignSelf: "flex-start",
-        marginTop: 6,
-        marginRight: 8
+        marginRight: 8,
+        marginTop: 6
     },
     textoBoton: {
         fontWeight: "bold",
         fontSize: 14,
-        color: "#ffffff",
     },
     botonesLikeYComentario:{
         flex: 1,

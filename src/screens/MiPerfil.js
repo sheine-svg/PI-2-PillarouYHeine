@@ -43,15 +43,20 @@ function MiPerfil(props) {
         <View style={styles.container}>
             <Text style={styles.titulo}>Mi Perfil</Text>
 
-            <FlatList
-                data={perfil}
-                renderItem={({ item }) => (
-                    <View>
-                        <Text style={styles.datosUsuario}>Usuario: {item.nombre}</Text>
-                        <Text style={styles.datosUsuario}>Email: {item.mail}</Text>
-                    </View>
-                )}
-            />
+            <View>
+
+                <FlatList
+                    data={perfil}
+                    renderItem={({ item }) => (
+                        <View>
+                            <Text style={styles.datosUsuario}>¡Hola {item.nombre}!</Text>
+                            <Text style={styles.datosUsuario}>Email: {item.mail}</Text>
+                        </View>
+                    )}
+                />
+            </View>
+
+            <Text style={styles.tituloDos}>Mis posteos</Text>
 
             <FlatList
                 data={posteosUsuario}
@@ -71,21 +76,31 @@ function MiPerfil(props) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#ffffffff"
+        backgroundColor: "#FFFFFF"
     },
     titulo: {
         fontWeight: "bold",
         fontSize: 30,
+        marginTop: 30,
         marginBottom: 15,
         color: "#2563EB",
         textAlign: "center"
+    },
+    tituloDos: {
+        fontWeight: "bold",
+        fontSize: 25,
+        marginTop: 30,
+        marginBottom: 15,
+        color: "#2563EB",
+        marginLeft: 13
     },
     boton: {
         padding: 12,
         backgroundColor: "#2563EB",
         borderRadius: 15,
         alignItems: "center",
-        marginTop: 4
+        marginTop: 4,
+        marginBottom: 8
     },
     textoBoton: {
         fontWeight: "bold",
@@ -93,9 +108,9 @@ const styles = StyleSheet.create({
     },
     datosUsuario: {
         fontSize: 20,
-        fontWeight: "bold",
         marginLeft: 15,
-    },
+        marginBottom: 5
+    }
 })
 
 export default MiPerfil;

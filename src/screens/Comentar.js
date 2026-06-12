@@ -7,18 +7,24 @@ import Comentario from '../components/Comentario';
 function Comentar(props) {
     const [comentario, setComentario] = useState("");
     const [todosLosComentarios, setTodosLosComentarios] = useState([]);
+    const [mjeError, setMjeError] = useState("");
 
     const idPosteo = props.route.params.idPosteo;
 
     useEffect(() => {
         db.collection("posts")
             .doc(idPosteo)
-            .onSnapshot( doc => {
+            .onSnapshot(doc => {
                 setTodosLosComentarios(doc.data().todosLosComentarios || []);
             })
     }, []);
 
     function agregarComentario() {
+        if (comentario === "") {
+            setMjeError("El comentario no puede estar vacío");
+            return;
+        }
+
         db.collection("posts")
             .doc(idPosteo)
             .update({
@@ -28,7 +34,10 @@ function Comentar(props) {
                     createdAt: Date.now(),
                 })
             })
-            .then(res => console.log("comentario agregado"))
+            .then(res => {
+                setComentario("");
+                setMjeError("");
+            })
             .catch(e => console.log(e))
     }
 
@@ -43,9 +52,11 @@ function Comentar(props) {
                     onChangeText={text => setComentario(text)}
                     value={comentario} />
 
+                {mjeError !== "" ? <Text style={styles.error}>{mjeError}</Text> : null}
+
                 <Pressable onPress={() => agregarComentario()}
                     style={styles.boton}>
-                    <Text style={styles.textoBoton} > Publicar comentario </Text>
+                    <Text style={styles.textoBoton}>Publicar comentario</Text>
                 </Pressable>
 
                 <FlatList
@@ -62,14 +73,16 @@ function Comentar(props) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        margin: 20,
+        backgroundColor: "#FFFFFF",
+        justifyContent: "center"
     },
     boton: {
         padding: 12,
         backgroundColor: "#2563EB",
         borderRadius: 15,
         alignItems: "center",
-        marginTop: 4
+        marginTop: 4,
+        marginBottom: 20
     },
     textoBoton: {
         fontWeight: "bold",
@@ -77,24 +90,25 @@ const styles = StyleSheet.create({
     },
     titulo: {
         fontWeight: "bold",
-        fontSize: 50,
-        marginBottom: 10
+        fontSize: 30,
+        marginBottom: 15,
+        color: "#2563EB",
+        textAlign: "center"
     },
     form: {
-        backgroundColor: "#ffffff",
         padding: 20,
-        borderRadius: 12,
+        borderRadius: 15,
     },
     campo: {
         borderWidth: 1,
-        borderColor: "#d1d5db",
-        borderRadius: 8,
+        borderColor: "#E5E7EB",
+        backgroundColor: "#F5F6FA",
+        borderRadius: 15,
         paddingHorizontal: 14,
         paddingVertical: 12,
         fontSize: 16,
-        backgroundColor: "#ffffff",
-        color: "#111827",
         marginBottom: 12,
+        height: 80
     },
     error: {
         color: "red",

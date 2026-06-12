@@ -49,11 +49,16 @@ function HomePage(props) {
 const styles = StyleSheet.create({
     flatlist: {
         flex: 1,
+        backgroundColor: "#FFFFFF",
     },
     titulo: {
         fontWeight: "bold",
-        fontSize: 50,
+        fontSize: 30,
         marginBottom: 10,
+        marginTop: 30,
+        marginHorizontal: 10,
+        color: "#2563EB",
+        alignSelf: "center"
     },
     cargando: {
         flex: 1,

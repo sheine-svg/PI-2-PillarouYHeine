@@ -4,8 +4,14 @@ import { db, auth } from "../firebase/config";
 
 function NuevoPost(props) {
     const [descripcion, setDescripcion] = useState("");
+    const [mjeError, setMjeError] = useState("");
 
     function onSubmit() {
+        if (descripcion === ""){
+            setMjeError("El post no puede estar vacío");
+            return;
+        }
+
         db.collection("posts").add({
             email: auth.currentUser.email,
             descripcionPost: descripcion,
@@ -13,8 +19,11 @@ function NuevoPost(props) {
             todosLosComentarios: [],
             createdAt: Date.now(),
         })
-        .then(res => {props.navigation.navigate('HomeStack');}
-        )
+        .then(res => {
+            setDescripcion("");
+            setMjeError("");
+            props.navigation.navigate('HomeStack');
+        })
         .catch( error => console.log(error))
     };
 
@@ -29,9 +38,11 @@ function NuevoPost(props) {
                     onChangeText={text => setDescripcion(text)}
                     value={descripcion} />
 
+                {mjeError !== "" ? <Text style={styles.error}>{mjeError}</Text> : null}
+
                 <Pressable onPress={() => onSubmit()}
                     style={styles.boton}>
-                    <Text style={styles.textoBoton} > Publicar post </Text>
+                    <Text style={styles.textoBoton}>Publicar post</Text>
                 </Pressable>
             </View>
         </View>
@@ -41,7 +52,8 @@ function NuevoPost(props) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#ffffffff"
+        backgroundColor: "#FFFFFF",
+        justifyContent: "center",
     },
     boton: {
         padding: 12,
@@ -67,12 +79,14 @@ const styles = StyleSheet.create({
     },
     campo: {
         borderWidth: 1,
-        borderColor: "#d1d5db",
+        borderColor: "#E5E7EB",
+        backgroundColor: "#F5F6FA",
         borderRadius: 15,
         paddingHorizontal: 14,
         paddingVertical: 12,
         fontSize: 16,
         marginBottom: 12,
+        height: 80,
     },
     error: {
         color: "red",
