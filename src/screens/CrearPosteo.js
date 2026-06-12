@@ -10,7 +10,7 @@ function NuevoPost(props) {
             email: auth.currentUser.email,
             descripcionPost: descripcion,
             likes: [],
-            comentarios: [],
+            todosLosComentarios: [],
             createdAt: Date.now(),
         })
         .then(res => {props.navigation.navigate('HomeStack');}
@@ -41,14 +41,14 @@ function NuevoPost(props) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        margin: 20,
+        backgroundColor: "#ffffffff"
     },
     boton: {
         padding: 12,
-        backgroundColor: "rgba(42, 84, 237, 0.74)",
-        borderRadius: 4,
+        backgroundColor: "#2563EB",
+        borderRadius: 15,
         alignItems: "center",
-        margin: 10
+        marginTop: 4
     },
     textoBoton: {
         fontWeight: "bold",
@@ -56,23 +56,22 @@ const styles = StyleSheet.create({
     },
     titulo: {
         fontWeight: "bold",
-        fontSize: 50,
-        marginBottom: 10
+        fontSize: 30,
+        marginBottom: 15,
+        color: "#2563EB",
+        textAlign: "center"
     },
     form: {
-        backgroundColor: "#ffffff",
         padding: 20,
-        borderRadius: 12,
+        borderRadius: 15,
     },
     campo: {
         borderWidth: 1,
         borderColor: "#d1d5db",
-        borderRadius: 8,
+        borderRadius: 15,
         paddingHorizontal: 14,
         paddingVertical: 12,
         fontSize: 16,
-        backgroundColor: "#ffffff",
-        color: "#111827",
         marginBottom: 12,
     },
     error: {

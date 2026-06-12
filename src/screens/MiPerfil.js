@@ -43,12 +43,12 @@ function MiPerfil(props) {
         <View style={styles.container}>
             <Text style={styles.titulo}>Mi Perfil</Text>
 
-            <FlatList style={styles.datos}
+            <FlatList
                 data={perfil}
                 renderItem={({ item }) => (
                     <View>
-                        <Text>Usuario: {item.nombre}</Text>
-                        <Text>Email: {item.mail}</Text>
+                        <Text style={styles.datosUsuario}>Usuario: {item.nombre}</Text>
+                        <Text style={styles.datosUsuario}>Email: {item.mail}</Text>
                     </View>
                 )}
             />
@@ -71,26 +71,30 @@ function MiPerfil(props) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        margin: 20,
+        backgroundColor: "#ffffffff"
     },
     titulo: {
         fontWeight: "bold",
-        fontSize: 50,
-        marginBottom: 10
+        fontSize: 30,
+        marginBottom: 15,
+        color: "#2563EB",
+        textAlign: "center"
     },
     boton: {
         padding: 12,
-        backgroundColor: "#F5A623",
-        borderRadius: 4,
+        backgroundColor: "#2563EB",
+        borderRadius: 15,
         alignItems: "center",
-        marginBottom: 10,
+        marginTop: 4
     },
     textoBoton: {
         fontWeight: "bold",
-        fontSize: 16,
+        fontSize: 16
     },
-    datos: {
-        height: 60,
+    datosUsuario: {
+        fontSize: 20,
+        fontWeight: "bold",
+        marginLeft: 15,
     },
 })
 

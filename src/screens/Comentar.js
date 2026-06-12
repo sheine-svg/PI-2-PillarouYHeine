@@ -8,26 +8,25 @@ function Comentar(props) {
     const [comentario, setComentario] = useState("");
     const [todosLosComentarios, setTodosLosComentarios] = useState([]);
 
+    const idPosteo = props.route.params.idPosteo;
+
     useEffect(() => {
-        db.collection("posts").onSnapshot(
-            docs => {
-                let comentarios = [];
-                docs.forEach(doc => {
-                    comentarios.push({
-                        id: doc.id,
-                        data: doc.data()
-                    })
-                })
-                setTodosLosComentarios(comentarios)
-            }
-        )
+        db.collection("posts")
+            .doc(idPosteo)
+            .onSnapshot( doc => {
+                setTodosLosComentarios(doc.data().todosLosComentarios || []);
+            })
     }, []);
 
     function agregarComentario() {
         db.collection("posts")
-            .doc(props.id)
+            .doc(idPosteo)
             .update({
-                comentario: firebase.firestore.FieldValue.arrayUnion(comentario)
+                todosLosComentarios: firebase.firestore.FieldValue.arrayUnion({
+                    email: auth.currentUser.email,
+                    comentario: comentario,
+                    createdAt: Date.now(),
+                })
             })
             .then(res => console.log("comentario agregado"))
             .catch(e => console.log(e))
@@ -51,8 +50,8 @@ function Comentar(props) {
 
                 <FlatList
                     data={todosLosComentarios}
-                    keyExtractor={comentarios => comentarios.id.toString()}
-                    renderItem={({ item }) => <Comentario data={item.data} id={item.id} />}
+                    keyExtractor={(item, index) => index.toString()}
+                    renderItem={({ item }) => <Comentario data={item} />}
                 />
 
             </View>
@@ -67,10 +66,10 @@ const styles = StyleSheet.create({
     },
     boton: {
         padding: 12,
-        backgroundColor: "rgba(42, 84, 237, 0.74)",
-        borderRadius: 4,
+        backgroundColor: "#2563EB",
+        borderRadius: 15,
         alignItems: "center",
-        margin: 10
+        marginTop: 4
     },
     textoBoton: {
         fontWeight: "bold",
