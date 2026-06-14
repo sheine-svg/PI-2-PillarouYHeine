@@ -49,8 +49,8 @@ function MiPerfil(props) {
                     data={perfil}
                     renderItem={({ item }) => (
                         <View>
-                            <Text style={styles.datosUsuario}>¡Hola {item.nombre}!</Text>
-                            <Text style={styles.datosUsuario}>Email: {item.mail}</Text>
+                            <Text style={styles.nombreUsu}>{item.nombre}</Text>
+                            <Text style={styles.mailUsu}>{item.mail}</Text>
                         </View>
                     )}
                 />
@@ -67,7 +67,7 @@ function MiPerfil(props) {
             <Pressable
                 onPress={() => logout()}
                 style={styles.boton}>
-                <Text style={styles.textoBoton}>Desloguearse</Text>
+                <Text style={styles.textoBoton}>Cerrar sesión</Text>
             </Pressable>
         </View>
     )
@@ -99,17 +99,22 @@ const styles = StyleSheet.create({
         backgroundColor: "#2563EB",
         borderRadius: 15,
         alignItems: "center",
-        marginTop: 4,
-        marginBottom: 8
+        margin: 8
     },
     textoBoton: {
         fontWeight: "bold",
         fontSize: 16
     },
-    datosUsuario: {
+    mailUsu: {
         fontSize: 20,
         marginLeft: 15,
         marginBottom: 5
+    },
+    nombreUsu: {
+        fontSize: 25,
+        marginLeft: 15,
+        marginBottom: 5,
+        fontWeight: "500"
     }
 })
 

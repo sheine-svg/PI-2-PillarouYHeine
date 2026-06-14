@@ -1,9 +1,6 @@
 import { Text, View, StyleSheet, Pressable } from 'react-native';
 import { db, auth } from "../firebase/config";
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import firebase from 'firebase';
-
-const Stack = createNativeStackNavigator();
 
 function Post(props) {
     const likes = props.data.likes || [];
@@ -26,7 +23,7 @@ function Post(props) {
             .update({
                 likes: firebase.firestore.FieldValue.arrayRemove(emailActual)
             })
-            .then(() => { console.log("like agregado") })
+            .then(() => { console.log("like sacado") })
             .catch(e => console.log(e))
     }
 
@@ -92,7 +89,7 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
         fontSize: 14,
     },
-    botonesLikeYComentario:{
+    botonesLikeYComentario: {
         flex: 1,
         flexDirection: "row"
     }

@@ -6,11 +6,11 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 const Stack = createNativeStackNavigator();
 
 function HomeStack() {
-    return(
-            <Stack.Navigator>
-                <Stack.Screen name="Home" component={HomePage} options={ { headerShown: false }}/>
-                <Stack.Screen name="Comentar" component={Comentar} options={ { headerShown: false }} />
-            </Stack.Navigator>
+    return (
+        <Stack.Navigator>
+            <Stack.Screen name="Home" component={HomePage} options={{ headerShown: false }} />
+            <Stack.Screen name="Comentar" component={Comentar} options={{ headerShown: false }} />
+        </Stack.Navigator>
     )
 }
 

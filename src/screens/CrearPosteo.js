@@ -7,7 +7,7 @@ function NuevoPost(props) {
     const [mjeError, setMjeError] = useState("");
 
     function onSubmit() {
-        if (descripcion === ""){
+        if (descripcion === "") {
             setMjeError("El post no puede estar vacío");
             return;
         }
@@ -19,12 +19,12 @@ function NuevoPost(props) {
             todosLosComentarios: [],
             createdAt: Date.now(),
         })
-        .then(res => {
-            setDescripcion("");
-            setMjeError("");
-            props.navigation.navigate('HomeStack');
-        })
-        .catch( error => console.log(error))
+            .then(res => {
+                setDescripcion("");
+                setMjeError("");
+                props.navigation.navigate('HomeStack');
+            })
+            .catch(error => console.log(error))
     };
 
     return (

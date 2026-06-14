@@ -51,13 +51,13 @@ function Login(props) {
 
                     <TextInput style={styles.campo}
                         keyboardType='email-address'
-                        placeholder='Ingresa tu Email'
+                        placeholder='Ingrese su email'
                         onChangeText={text => setEmail(text)}
                         value={email} />
 
                     <TextInput style={styles.campo}
                         keyboardType='default'
-                        placeholder='Ingresa una contraseña'
+                        placeholder='Ingrese su contraseña'
                         secureTextEntry={true}
                         onChangeText={text => setPassword(text)}
                         value={password} />

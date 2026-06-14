@@ -54,19 +54,19 @@ function Register(props) {
                 <View style={styles.form}>
                     <TextInput style={styles.campo}
                         keyboardType='default'
-                        placeholder='Ingresa un nombre de usuario'
+                        placeholder='Ingrese su nombre de usuario'
                         onChangeText={text => setUserName(text)}
                         value={userName} />
 
                     <TextInput style={styles.campo}
                         keyboardType='email-address'
-                        placeholder='Ingresa un Email'
+                        placeholder='Ingrese su email'
                         onChangeText={text => setEmail(text)}
                         value={email} />
 
                     <TextInput style={styles.campo}
                         keyboardType='default'
-                        placeholder='Ingresa una contraseña'
+                        placeholder='Ingrese su contraseña'
                         secureTextEntry={true}
                         onChangeText={text => setPassword(text)}
                         value={password} />
@@ -76,7 +76,7 @@ function Register(props) {
                     <Pressable
                         onPress={() => onSubmit()}
                         style={styles.boton}>
-                        <Text style={styles.textoBoton}> Registrarse </Text>
+                        <Text style={styles.textoBoton}>Registrarse</Text>
                     </Pressable>
 
                     <Pressable
