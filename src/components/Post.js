@@ -45,7 +45,7 @@ function Post(props) {
                             <Text style={styles.textoBoton}>🩶</Text>
                         </Pressable>
                 }
-                <Pressable onPress={() => props.navigation.navigate("Comentar", { idPosteo: props.id })} style={styles.boton} >
+                <Pressable onPress={() => props.navigation.navigate("Comentar", { idPosteo: props.id, emailPosteo: props.data.email, descPosteo: props.data.descripcionPost, likePosteo: props.data.likes.length })} style={styles.boton} >
                     <Text style={styles.textoBoton}>💬</Text>
                 </Pressable>
             </View>

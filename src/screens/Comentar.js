@@ -10,6 +10,9 @@ function Comentar(props) {
     const [mjeError, setMjeError] = useState("");
 
     const idPosteo = props.route.params.idPosteo;
+    const emailPosteo = props.route.params.emailPosteo;
+    const descPosteo = props.route.params.descPosteo;
+    const likePosteo = props.route.params.likePosteo;
 
     useEffect(() => {
         db.collection("posts")
@@ -46,6 +49,19 @@ function Comentar(props) {
             <Text style={styles.titulo}>Nuevo comentario</Text>
 
             <View style={styles.form}>
+                <View style={styles.postContenedor}>
+                    <Text style={styles.tituloPost}>Post:</Text>
+                    <Text style={styles.usuario}>{emailPosteo}</Text>
+                    <Text style={styles.texto}>{descPosteo}</Text>
+                    <Text style={styles.cantidadLikes}>{likePosteo} likes</Text>
+                </View>
+
+                <FlatList style={styles.comentarios}
+                    data={todosLosComentarios}
+                    keyExtractor={(item, index) => index.toString()}
+                    renderItem={({ item }) => <Comentario data={item} />}
+                />
+
                 <TextInput style={styles.campo}
                     keyboardType='default'
                     placeholder='Ingresa tu comentario'
@@ -58,12 +74,6 @@ function Comentar(props) {
                     style={styles.boton}>
                     <Text style={styles.textoBoton}>Publicar comentario</Text>
                 </Pressable>
-
-                <FlatList
-                    data={todosLosComentarios}
-                    keyExtractor={(item, index) => index.toString()}
-                    renderItem={({ item }) => <Comentario data={item} />}
-                />
 
             </View>
         </View>
@@ -114,6 +124,43 @@ const styles = StyleSheet.create({
         color: "red",
         marginBottom: 12,
         textAlign: "center",
+    },
+    usuario: {
+        fontWeight: "bold",
+        fontSize: 14,
+        marginBottom: 4,
+    },
+    texto: {
+        fontSize: 16,
+        marginBottom: 8,
+    },
+    cantidadLikes: {
+        fontSize: 13,
+        color: "#6B7280",
+        marginBottom: 8,
+    },
+    tituloPost: {
+        fontSize: 20,
+    },
+    postContenedor: {
+        borderWidth: 1,
+        borderColor: "#E5E7EB",
+        backgroundColor: "#F5F6FA",
+        borderRadius: 15,
+        paddingHorizontal: 14,
+        paddingVertical: 12,
+        fontSize: 16,
+        marginBottom: 12,
+        height: 115,
+    },
+    comentarios: {
+        borderWidth: 1,
+        borderColor: "#E5E7EB",
+        backgroundColor: "#F5F6FA",
+        borderRadius: 15,
+        fontSize: 16,
+        marginBottom: 12,
+        height: 80,
     }
 })
 
