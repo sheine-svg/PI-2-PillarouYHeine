@@ -44,9 +44,9 @@ function MiPerfil(props) {
             <Text style={styles.titulo}>Mi Perfil</Text>
 
             <View>
-
                 <FlatList
                     data={perfil}
+                    keyExtractor={item => item.toString()}
                     renderItem={({ item }) => (
                         <View>
                             <Text style={styles.nombreUsu}>{item.nombre}</Text>

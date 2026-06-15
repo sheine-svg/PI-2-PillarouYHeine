@@ -2,7 +2,7 @@ import { Text, View, StyleSheet } from 'react-native';
 
 function Comentario(props) {
     return (
-        <View style={styles.comentario}>
+        <View style={styles.containerComentario}>
             <Text style={styles.usuario}>{props.data.email}</Text>
             <Text style={styles.texto}>{props.data.comentario}</Text>
         </View>
@@ -10,7 +10,7 @@ function Comentario(props) {
 }
 
 const styles = StyleSheet.create({
-    comentario: {
+    containerComentario: {
         backgroundColor: "#F5F6FA",
         padding: 15,
         marginVertical: 6,

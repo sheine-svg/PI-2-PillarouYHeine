@@ -1,10 +1,12 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
+import HomeStack from './HomeStack';
 import CrearPosteo from '../screens/CrearPosteo';
 import MiPerfil from '../screens/MiPerfil';
+
 import Ionicons from '@expo/vector-icons/Ionicons';
 import Entypo from '@expo/vector-icons/Entypo';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
-import HomeStack from './HomeStack';
 
 const Tab = createBottomTabNavigator();
 

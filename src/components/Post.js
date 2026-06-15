@@ -23,7 +23,7 @@ function Post(props) {
             .update({
                 likes: firebase.firestore.FieldValue.arrayRemove(emailActual)
             })
-            .then(() => { console.log("like sacado") })
+            .then(() => console.log("like sacado"))
             .catch(e => console.log(e))
     }
 
@@ -35,7 +35,6 @@ function Post(props) {
             <Text style={styles.cantidadLikes}>{likes.length} likes</Text>
 
             <View style={styles.botonesLikeYComentario}>
-
                 {
                     yaTieneLike
                         ? <Pressable onPress={() => sacarLike()} style={styles.boton}>

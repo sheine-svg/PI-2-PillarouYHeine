@@ -1,5 +1,5 @@
 import { Pressable, View, Text, StyleSheet, TextInput } from 'react-native';
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { db, auth } from "../firebase/config";
 import Header from '../components/Header';
 

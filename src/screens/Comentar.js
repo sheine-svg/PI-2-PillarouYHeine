@@ -50,17 +50,18 @@ function Comentar(props) {
 
             <View style={styles.form}>
                 <View style={styles.postContenedor}>
-                    <Text style={styles.tituloPost}>Post:</Text>
                     <Text style={styles.usuario}>{emailPosteo}</Text>
                     <Text style={styles.texto}>{descPosteo}</Text>
                     <Text style={styles.cantidadLikes}>{likePosteo} likes</Text>
                 </View>
 
-                <FlatList style={styles.comentarios}
-                    data={todosLosComentarios}
-                    keyExtractor={(item, index) => index.toString()}
-                    renderItem={({ item }) => <Comentario data={item} />}
-                />
+                <View>
+                    <FlatList style={styles.comentarios}
+                        data={todosLosComentarios}
+                        keyExtractor={(item, index) => index.toString()}
+                        renderItem={({ item }) => <Comentario data={item} />}
+                    />
+                </View>
 
                 <TextInput style={styles.campo}
                     keyboardType='default'
@@ -139,9 +140,6 @@ const styles = StyleSheet.create({
         color: "#6B7280",
         marginBottom: 8,
     },
-    tituloPost: {
-        fontSize: 20,
-    },
     postContenedor: {
         borderWidth: 1,
         borderColor: "#E5E7EB",
@@ -151,7 +149,6 @@ const styles = StyleSheet.create({
         paddingVertical: 12,
         fontSize: 16,
         marginBottom: 12,
-        height: 115,
     },
     comentarios: {
         borderWidth: 1,
@@ -160,7 +157,9 @@ const styles = StyleSheet.create({
         borderRadius: 15,
         fontSize: 16,
         marginBottom: 12,
-        height: 80,
+        height: "auto",
+        width: 350,
+        alignSelf: "center"
     }
 })
 
